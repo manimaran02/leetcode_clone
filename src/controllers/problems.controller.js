@@ -1,7 +1,7 @@
 function problemPing(req,res){
     
     return res.json({
-        msg : "Problem controller is live up"
+        msg : "Problem controller is live up ping check"
     })
 }
 
