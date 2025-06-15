@@ -6,7 +6,7 @@ function problemPing(req,res){
 }
 
 function addProblem(req,res){
-
+        
 }
 
 function getProblem(req,res){
