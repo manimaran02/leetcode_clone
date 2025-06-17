@@ -1,3 +1,5 @@
+const BadRequest = require("../errors/badrequest.error")
+
 function problemPing(req,res){
     
     return res.json({
@@ -5,8 +7,12 @@ function problemPing(req,res){
     })
 }
 
-function addProblem(req,res){
-        
+function addProblem(req,res,next){
+        try {
+            throw new BadRequest('addProblem')
+        } catch (error) {
+            next(error)
+        }
 }
 
 function getProblem(req,res){
