@@ -1,4 +1,9 @@
-const BadRequest = require("../errors/badrequest.error")
+
+const {StatusCodes} = require('http-status-codes')
+const {ProblemRepository} = require('../repositories')
+const {ProblemService} = require('../services')
+ 
+const problemService = new ProblemService(new ProblemRepository())
 
 function problemPing(req,res){
     
@@ -7,9 +12,20 @@ function problemPing(req,res){
     })
 }
 
-function addProblem(req,res,next){
+async function addProblem(req,res,next){
         try {
-            throw new BadRequest('addProblem')
+             
+            // console.log("Controller",req.body)
+            const newProblem = await problemService.createProblem(req.body)
+
+            return res.status(StatusCodes.CREATED).json({
+                success : true,
+                message : "Successfully created",
+                error : {},
+                data : newProblem
+            })
+
+
         } catch (error) {
             next(error)
         }
