@@ -6,7 +6,7 @@ class ProblemService{
     }
 
     async createProblem(problemData){
-        try {
+        
 
            
             problemData.description = markDown(problemData.description)
@@ -16,12 +16,15 @@ class ProblemService{
             const problem = await this.problemRepo.createProblem(problemData)
             //  console.log("Problem created from service",problem)
             return problem
-           }
-        catch (error) {
-            console.log(error)
-            throw error    
-            
-        }
+          
+
+    }
+
+    async getAllProblems(){
+
+        const problem = await this.problemRepo.getAllProblems()
+
+        return problem
 
     }
 }

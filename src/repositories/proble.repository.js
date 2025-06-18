@@ -4,7 +4,7 @@ class ProblemRepository{
 
     async createProblem(problemData){
         
-       try {
+       
         // console.log("Repo",problemData)
         
          const problem = await Problem.create({
@@ -14,13 +14,14 @@ class ProblemRepository{
         })
         // console.log("Problem created from repo",problem)
         return problem
-       } catch (error) {
+       
 
-            console.log(error)
-            throw error
+    }
 
-        }
+    async getAllProblems(){
+        const problem = await Problem.find({})
 
+        return problem
     }
 
 }
