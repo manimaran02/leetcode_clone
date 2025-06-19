@@ -12,7 +12,7 @@ function markDown(markdownContent){
     
     const turndownService = new turndown()
     
-    const sanitizeHTML = sanitizeHtml(htmlContent,{allowedTags : sanitizeHtml.defaults.allowedTags})
+    const sanitizeHTML = sanitizeHtml(htmlContent,{allowedTags : sanitizeHtml.defaults.allowedTags.concat(['img'])})
 
     // console.log(sanitizeHTML)
 

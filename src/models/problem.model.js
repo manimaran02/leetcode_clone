@@ -14,7 +14,7 @@ const problemSchema = new mongoose.Schema({
         enum :['easy','meduim','hard'],
         default : 'easy'     
     },
-    testCase : [
+    testCases : [
     {
         input : {
             type : String,

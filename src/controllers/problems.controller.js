@@ -2,6 +2,7 @@
 const {StatusCodes} = require('http-status-codes')
 const {ProblemRepository} = require('../repositories')
 const {ProblemService} = require('../services')
+const NotFound = require('../errors/notfound.error')
  
 const problemService = new ProblemService(new ProblemRepository())
 
@@ -31,8 +32,30 @@ async function addProblem(req,res,next){
         }
 }
 
-function getProblem(req,res,next){
+async function getProblem(req,res,next){
 
+    try {
+        const problem = await problemService.getProblem(req.params.id)
+
+        
+        if(!problem){
+            throw new NotFound("Invalid id",{'Problem' : req.params.id})
+        }
+
+        return res.status(StatusCodes.OK).json({
+            success : true,
+                message : "Successfully get the problem by ID",
+                error : {},
+                data : problem
+        })
+
+    } catch (error) {
+        
+        console.log(error)
+        next(error)
+        
+    }
+        
 }
 
 async function getProblems(req,res,next){
@@ -40,6 +63,7 @@ async function getProblems(req,res,next){
     try {
         
         const response = await problemService.getAllProblems()
+
 
         return res.status(StatusCodes.OK).json({
                 success : true,
@@ -49,7 +73,8 @@ async function getProblems(req,res,next){
         })
 
     } catch (error) {
-        
+        console.log(error)
+        next(error)
     }
 
 }

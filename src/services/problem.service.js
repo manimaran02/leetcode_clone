@@ -27,6 +27,14 @@ class ProblemService{
         return problem
 
     }
+
+    async getProblem(id){
+
+        const problem = await this.problemRepo.getProblem(id)
+
+        return problem
+
+    }
 }
 
 
