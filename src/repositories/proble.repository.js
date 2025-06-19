@@ -30,6 +30,21 @@ class ProblemRepository{
 
     }
 
+    async deleteProblem(id){
+        
+        const problem = await Problem.findByIdAndDelete(id)
+
+        // console.log(problem)
+
+        return problem
+    }
+
+    async updateProblem(id,problemData){
+        console.log("Repo =>",problemData," id =>",id)
+        const problem = await Problem.findByIdAndUpdate(id,problemData)
+        return problem
+    }
+
 }
 
 

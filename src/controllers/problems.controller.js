@@ -73,17 +73,60 @@ async function getProblems(req,res,next){
         })
 
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         next(error)
     }
 
 }
 
-function updateProblem(req,res){
+async function updateProblem(req,res,next){
+
+    console.log(`${req.params.id} Params  ${req.body} from body`)
+
+    try {
+        const updatedProblem = await problemService.updateProblem(req.params.id,req.body)
+
+        // console.log(updatedProblem, " From Controller")
+        
+         if(!updatedProblem){
+            throw new NotFound("Invalid id",{'Problem' : req.params.id})
+        }
+        
+        return res.status(StatusCodes.OK).json({
+                success : true,
+                message : "Successfully created",
+                error : {},
+                data : updatedProblem
+    })
+
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+
 
 }
 
-function deleteProblem(req,res){
+async function deleteProblem(req,res,next){
+   try {
+     
+     const problem = await problemService.deleteProblem(req.params.id)
+    
+    if(!problem){
+            throw new NotFound("Invalid id",{'Problem' : req.params.id})
+        }
+    
+    return res.status(StatusCodes.OK).json({
+        success : true,
+                message : "Problem deleted Successfully",
+                error : {},
+                data : problem
+    })  
+
+   } catch (error) {
+        console.log(error)
+        next(error)
+   }  
 
 }
 

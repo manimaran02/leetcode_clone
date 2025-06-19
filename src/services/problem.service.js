@@ -35,6 +35,25 @@ class ProblemService{
         return problem
 
     }
+
+    async deleteProblem(id){
+
+        const problem = await this.problemRepo.deleteProblem(id)
+
+        return problem        
+
+    }
+
+    async updateProblem(id,problemData){
+
+        
+        problemData.description ? markDown(problemData.description) : ""
+        // console.log(problemData,"From service")
+        const problem = await this.problemRepo.updateProblem(id,problemData)
+
+        return problem
+
+    }
 }
 
 
