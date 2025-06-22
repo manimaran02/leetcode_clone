@@ -3,6 +3,7 @@ const {StatusCodes} = require('http-status-codes')
 const {ProblemRepository} = require('../repositories')
 const {ProblemService} = require('../services')
 const NotFound = require('../errors/notfound.error')
+
  
 const problemService = new ProblemService(new ProblemRepository())
 
@@ -81,7 +82,7 @@ async function getProblems(req,res,next){
 
 async function updateProblem(req,res,next){
 
-    console.log(`${req.params.id} Params  ${req.body} from body`)
+    // console.log(`${req.params.id} Params  ${req.body} from body`)
 
     try {
         const updatedProblem = await problemService.updateProblem(req.params.id,req.body)
@@ -100,7 +101,7 @@ async function updateProblem(req,res,next){
     })
 
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         next(error)
     }
 
@@ -113,6 +114,7 @@ async function deleteProblem(req,res,next){
      const problem = await problemService.deleteProblem(req.params.id)
     
     if(!problem){
+           
             throw new NotFound("Invalid id",{'Problem' : req.params.id})
         }
     
@@ -124,7 +126,7 @@ async function deleteProblem(req,res,next){
     })  
 
    } catch (error) {
-        console.log(error)
+        // console.log(error)
         next(error)
    }  
 

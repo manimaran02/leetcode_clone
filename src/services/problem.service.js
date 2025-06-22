@@ -44,12 +44,12 @@ class ProblemService{
 
     }
 
-    async updateProblem(id,problemData){
+    async updateProblem(id,updateData){
 
         
-        problemData.description ? markDown(problemData.description) : ""
+        updateData.description ? markDown(updateData.description) : ""
         // console.log(problemData,"From service")
-        const problem = await this.problemRepo.updateProblem(id,problemData)
+        const problem = await this.problemRepo.updateProblem(id,updateData)
 
         return problem
 
